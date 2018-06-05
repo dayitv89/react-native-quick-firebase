@@ -1,4 +1,4 @@
-package com.gds.quickfirebasedemo;
+package com.gds.quickfirebase;
 
 import com.facebook.react.ReactActivity;
 

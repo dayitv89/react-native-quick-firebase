@@ -10,8 +10,10 @@ import RNQuickFirebase from 'react-native-quick-firebase';
 
 class App extends Component {
 	onSendOTP = async () => {
+		console.warn('click');
+
 		try {
-			const phoneNumber = '+919876543210';
+			const phoneNumber = '+919799990699';
 			await RNQuickFirebase.sendOTP(phoneNumber);
 			console.warn('otp sent to: ' + phoneNumber);
 			const sessionToken = await RNQuickFirebase.validateOTP('123456');

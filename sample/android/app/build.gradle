@@ -97,7 +97,7 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.gds.quickfirebasedemo"
+        applicationId "com.gds.quickfirebase"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -137,10 +137,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.0.0'
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.google.firebase:firebase-auth:16.0.1"
-//    implementation project(':react-native-quick-firebase')
+    implementation project(':react-native-quick-firebase')
 }
 
 apply plugin: 'com.google.gms.google-services'
