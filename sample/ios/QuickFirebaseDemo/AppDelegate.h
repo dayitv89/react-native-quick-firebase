@@ -10,7 +10,6 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <React/RCTEventEmitter.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, RCTBridgeModule>
 

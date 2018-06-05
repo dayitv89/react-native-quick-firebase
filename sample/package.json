@@ -11,6 +11,6 @@
 		"react-native-quick-firebase": "file:../"
 	},
 	"devDependencies": {
-		"babel-preset-react-native": "2.0.1"
+		"babel-preset-react-native": "4.0.0"
 	}
 }
