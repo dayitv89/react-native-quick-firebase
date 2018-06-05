@@ -1,0 +1,16 @@
+{
+	"name": "react-native-quick-firebase-sample",
+	"version": "0.0.1",
+	"private": false,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start"
+	},
+	"dependencies": {
+		"react": "16.0.0-alpha.12",
+		"react-native": "0.45.1",
+		"react-native-quick-firebase": "file:../"
+	},
+	"devDependencies": {
+		"babel-preset-react-native": "2.0.1"
+	}
+}
