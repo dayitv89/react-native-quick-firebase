@@ -1,4 +1,4 @@
-package com.quickmaps;
+package com.gds.quickfirebase;
 
 import com.facebook.react.ReactActivity;
 
