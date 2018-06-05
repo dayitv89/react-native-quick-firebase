@@ -1,4 +1,4 @@
-package com.quickmaps;
+package com.gds.quickfirebasedemo;
 
 import com.facebook.react.ReactActivity;
 

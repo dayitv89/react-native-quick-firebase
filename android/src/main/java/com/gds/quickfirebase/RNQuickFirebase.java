@@ -2,6 +2,7 @@ package com.gds.quickfirebase;
 
 import android.support.annotation.NonNull;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -42,7 +43,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void sendOTP(String phone) {
+    public void sendOTP(String phone, final Promise promise) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phone,        // Phone number to verify
                 60,              // Timeout duration
@@ -51,65 +52,45 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
                     public void onVerificationCompleted(PhoneAuthCredential credential) {
-                        // This callback will be invoked in two situations:
-                        // 1 - Instant verification. In some cases the phone number can be instantly
-                        //     verified without needing to send or enter a verification code.
-                        // 2 - Auto-retrieval. On some devices Google Play services can automatically
-                        //     detect the incoming verification SMS and perform verificaiton without user action.
-//                mTextViewProfile.setText("onVerificationCompleted: " + credential);
-//                mVerificationInProgress = false;
-//
-//                updateUI(STATE_VERIFY_SUCCESS, credential);
-//                signInWithPhoneAuthCredential(credential);
                     }
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
-//                mTextViewProfile.setText("onVerificationFailed: " + e.getMessage());
-//                mVerificationInProgress = false;
-//
-//                if (e instanceof FirebaseAuthInvalidCredentialsException) {
-//                    mPhoneNumberField.setError("Invalid phone number.");
-//                } else if (e instanceof FirebaseTooManyRequestsException) {
-//                    Snackbar.make(findViewById(android.R.id.content), "The SMS quota for the project has been exceeded", Snackbar.LENGTH_SHORT).show();
-//                }
-//                updateUI(STATE_VERIFY_FAILED);
+                        promise.reject(e);
                     }
 
                     @Override
                     public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
-                        // The SMS verification code has been sent to the provided phone number, we
-                        // now need to ask the user to enter the code and then construct a credential
-                        // by combining the code with a verification ID.
-
-//                mTextViewProfile.setText("onCodeSent: " + verificationId);
-//
-//                // Save verification ID and resending token so we can use them later
+                        promise.resolve(verificationId);
                         mVerificationId = verificationId;
                         mResendToken = token;
-//
-//                updateUI(STATE_CODE_SENT);
                     }
                 });
     }
 
     @ReactMethod
-    public void validateOTP(String code) {
+    public void validateOTP(String code,final Promise promise) {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
         mAuth.signInWithCredential(credential).addOnCompleteListener(reactContext.getCurrentActivity(), new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
+                    promise.resolve(user.getIdToken(true).getResult().getToken());
                 } else {
-
+                    promise.reject("false");
                 }
             }
         });
     }
 
     @ReactMethod
-    public void signOut() {
-        mAuth.signOut();
+    public void signOut(final Promise promise) {
+        try {
+            mAuth.signOut();
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject("false");
+        }
     }
 }

@@ -3,5 +3,5 @@ rootProject.name = 'firebaseDemo'
 include ':app'
 
 
-include ':react-native-quick-firebase'
-project(':react-native-quick-firebase').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-quick-firebase/android')
+//include ':react-native-quick-firebase'
+//project(':react-native-quick-firebase').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-quick-firebase/android')

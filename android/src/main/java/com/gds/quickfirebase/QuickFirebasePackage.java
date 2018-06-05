@@ -14,14 +14,13 @@ public class QuickFirebasePackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-
         modules.add(new RNQuickFirebase(reactContext));
         return modules;
     }
 
     @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
