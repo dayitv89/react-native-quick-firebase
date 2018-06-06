@@ -1,6 +1,6 @@
 {
 	"name": "react-native-quick-firebase",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Gaurav D. Sharma <er.gauravds@gmail.com>",
 	"description": "Quick firebase integration with phone auth and analytics",
 	"homepage": "https://github.com/dayitv89/react-native-quick-firebase",
