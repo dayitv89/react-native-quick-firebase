@@ -76,9 +76,9 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseUser user = task.getResult().getUser();
-                    promise.resolve(user.getIdToken(true).getResult().getToken());
+                    promise.resolve(user.getToken(false).getResult().getToken());
                 } else {
-                    promise.reject("false");
+                    promise.reject(task.getException());
                 }
             }
         });
