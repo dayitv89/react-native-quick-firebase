@@ -30,6 +30,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     private ReactApplicationContext reactContext;
     private FirebaseAuth mAuth;
+    private FirebaseAnalytics firebaseAnalytics;
     private String mVerificationId;
 
     private PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -39,6 +40,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
         super(reactContext);
         this.reactContext = reactContext;
         mAuth = FirebaseAuth.getInstance();
+        firebaseAnalytics = FirebaseAnalytics.getInstance(reactContext);
 
     }
 
@@ -101,17 +103,17 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setUserId(String id){
-        FirebaseAnalytics.getInstance(reactContext).setUserId(id);
+        firebaseAnalytics.setUserId(id);
     }
 
     @ReactMethod
     public void setUserProperty(String name, String property) {
-        FirebaseAnalytics.getInstance(reactContext).setUserProperty(name, property);
+        firebaseAnalytics.setUserProperty(name, property);
     }
 
     @ReactMethod
     public void logEvent(String name, ReadableMap parameters) {
-        FirebaseAnalytics.getInstance(reactContext).logEvent(name, Arguments.toBundle(parameters));
+        firebaseAnalytics.logEvent(name, Arguments.toBundle(parameters));
     }
 
     @ReactMethod
@@ -121,7 +123,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
             currentActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    FirebaseAnalytics.getInstance(reactContext).setCurrentScreen(currentActivity, name, null);
+                    firebaseAnalytics.setCurrentScreen(currentActivity, name, null);
                 }
             });
         }
@@ -129,6 +131,6 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setAnalyticsEnabled(boolean enabled) {
-        FirebaseAnalytics.getInstance(reactContext).setAnalyticsCollectionEnabled(enabled);
+        firebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
     }
 }
