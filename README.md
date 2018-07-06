@@ -10,7 +10,7 @@ Please add this entries as follow -
 
 ```
 pod 'RNQuickFirebase', :path => PROJECT_PATH + 'react-native-quick-firebase/ios'
-pod 'Firebase/Auth
+pod 'Firebase/Auth'
 ```
 
 - _Android_
