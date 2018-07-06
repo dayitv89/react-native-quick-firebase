@@ -128,7 +128,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setFirebaseAnalyticsEnabled(boolean enabled) {
+    public void setAnalyticsEnabled(boolean enabled) {
         FirebaseAnalytics.getInstance(reactContext).setAnalyticsCollectionEnabled(enabled);
     }
 }
