@@ -1,15 +1,20 @@
 package com.gds.quickfirebase;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.module.annotations.ReactModule;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-
+@SuppressLint("MissingPermission")
 @ReactModule(name = "RNQuickFirebase")
 public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
@@ -92,5 +97,38 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
         }catch(Exception e){
             promise.reject("false");
         }
+    }
+
+    @ReactMethod
+    public void setUserId(String id){
+        FirebaseAnalytics.getInstance(reactContext).setUserId(id);
+    }
+
+    @ReactMethod
+    public void setUserProperty(String name, String property) {
+        FirebaseAnalytics.getInstance(reactContext).setUserProperty(name, property);
+    }
+
+    @ReactMethod
+    public void logEvent(String name, ReadableMap parameters) {
+        FirebaseAnalytics.getInstance(reactContext).logEvent(name, Arguments.toBundle(parameters));
+    }
+
+    @ReactMethod
+    public void setScreenName(final String name) {
+        final Activity currentActivity =  reactContext.getCurrentActivity();
+        if(currentActivity != null){
+            currentActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    FirebaseAnalytics.getInstance(reactContext).setCurrentScreen(currentActivity, name, null);
+                }
+            });
+        }
+    }
+
+    @ReactMethod
+    public void setFirebaseAnalyticsEnabled(boolean enabled) {
+        FirebaseAnalytics.getInstance(reactContext).setAnalyticsCollectionEnabled(enabled);
     }
 }
