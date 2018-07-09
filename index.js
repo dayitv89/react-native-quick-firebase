@@ -27,8 +27,33 @@ const validateOTP = (otp: string): Promise => {
 
 const signOut = () => bridge.signOut();
 
+// Firebase Analytics Methods
+const setAnalyticsEnabled = (enabled: boolean) => {
+	return bridge.setAnalyticsEnabled(enabled)
+};
+const setUserId = (id) => {
+	return bridge.setUserId(id)
+};
+
+const setUserProperty = (name, property) => {
+	return bridge.setUserProperty(name, property)
+};
+
+const setScreenName = (screenName) => {
+	return bridge.setScreenName(screenName)
+};
+
+const logEvent = (name, params) =>{
+	return bridge.logEvent(name, params)
+};
+
 module.exports = {
 	sendOTP,
 	validateOTP,
-	signOut
+	signOut,
+	setAnalyticsEnabled,
+	setUserId,
+	setUserProperty,
+	setScreenName,
+	logEvent
 };
