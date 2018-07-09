@@ -62,6 +62,28 @@ RCT_EXPORT_METHOD(signOut) {
     }
 }
 
+RCT_EXPORT_METHOD(setUserId:(NSString*) userId) {
+    [FIRAnalytics setUserID:userId]
+}
+                  
+RCT_EXPORT_METHOD(setUserProperty:(NSString*) name
+                  property:(NSString*) property) {
+    [FIRAnalytics setUserPropertyString:property forName:name];
+}
+
+RCT_EXPORT_METHOD(logEvent:(NSString*) eventName
+                         property:(NSDictionary*) data) {
+    [FIRAnalytics logEventWithName:eventName parameters:data];
+}
+
+RCT_EXPORT_METHOD(setScreenName:(NSString*) screenName {
+    [FIRAnalytics setScreenName:screenName screenClass:screenName];
+}
+                  
+RCT_EXPORT_METHOD(setAnalyticsEnabled:(BOOL) enable) {
+    [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:enable]
+}
+
 @end
 
 #else
