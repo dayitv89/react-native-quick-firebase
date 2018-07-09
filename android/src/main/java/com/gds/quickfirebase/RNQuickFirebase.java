@@ -3,7 +3,7 @@ package com.gds.quickfirebase;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.annotation.NonNull;
-
+import android.os.Bundle;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -113,7 +113,8 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void logEvent(String name, ReadableMap parameters) {
-        firebaseAnalytics.logEvent(name, Arguments.toBundle(parameters));
+        Bundle parmas = parameters!=null? Arguments.toBundle(parameters):null;
+        firebaseAnalytics.logEvent(name,parmas);
     }
 
     @ReactMethod
