@@ -97,9 +97,9 @@ android {
     compileSdkVersion 27
 
     defaultConfig {
-        applicationId "com.gds.quickfirebase"
+        applicationId "com.gds.quickfirebase.firebasedemo"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         ndk {
