@@ -5,6 +5,7 @@
 
 #import "RNQuickFirebase.h"
 #import <FirebaseCore/FirebaseCore.h>
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #if __has_include(<FirebaseAuth/FIRAuth.h>)
 #import <FirebaseAuth/FirebaseAuth.h>
@@ -60,6 +61,29 @@ RCT_EXPORT_METHOD(signOut) {
         NSLog(@"Error signing out: %@", signOutError);
         return;
     }
+}
+
+
+RCT_EXPORT_METHOD(setUserId:(NSString*) userId) {
+    [FIRAnalytics setUserID:userId];
+}
+                  
+RCT_EXPORT_METHOD(setUserProperty:(NSString*) name
+                  property:(NSString*) property) {
+    [FIRAnalytics setUserPropertyString:property forName:name];
+}
+
+RCT_EXPORT_METHOD(logEvent:(NSString*) eventName
+                         property:(NSDictionary*) data) {
+    [FIRAnalytics logEventWithName:eventName parameters:data];
+}
+
+RCT_EXPORT_METHOD(setScreenName:(NSString*) screenName){
+    [FIRAnalytics setScreenName:screenName screenClass:screenName];
+}
+                  
+RCT_EXPORT_METHOD(setAnalyticsEnabled:(BOOL) enable) {
+    [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:enable];
 }
 
 @end
