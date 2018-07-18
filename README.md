@@ -1,5 +1,7 @@
 # react-native-quick-firebase
 
+![](https://img.shields.io/badge/Stable-v0.0.4-green.svg?style=flat)
+
 Firebase simple integration with phone auth and analytics only.
 
 Implementation in React Native project
@@ -11,6 +13,7 @@ Please add this entries as follow -
 ```
 pod 'RNQuickFirebase', :path => PROJECT_PATH + 'react-native-quick-firebase/ios'
 pod 'Firebase/Auth'
+pod 'FirebaseAnalytics'
 ```
 
 - _Android_
@@ -48,7 +51,8 @@ public class MainApplication extends Application implements ReactApplication {
 }
 ```
 
-### Sample code 
+### Sample code
+
 ```javascript
 //
 // Copyright © 2017-Present, Gaurav D. Sharma
@@ -61,20 +65,29 @@ import { AppRegistry, Text, TouchableOpacity, View } from 'react-native';
 import RNQuickFirebase from 'react-native-quick-firebase';
 
 class App extends Component {
-	onSendOTP = async () => {
-		console.warn('click');
+	componentDidMount() {
+		RNQuickFirebase.setAnalyticsEnabled(true);
+		RNQuickFirebase.setScreenName('Base OTP Scene');
+	}
 
+	onSendOTP = async () => {
+		RNQuickFirebase.logEvent('otp_button_click', null);
+		let params = null;
 		try {
-			const phoneNumber = '+919799990699';
+			const phoneNumber = '+919876543210';
 			await RNQuickFirebase.sendOTP(phoneNumber);
 			console.warn('otp sent to: ' + phoneNumber);
 			const sessionToken = await RNQuickFirebase.validateOTP('123456');
 			console.warn('OTP validated successfully with sessionToken: ' + sessionToken);
+			params = { otp_validate_event: 'otp_success' };
+			RNQuickFirebase.logEvent('otp_send_validate', params);
 			/// send this token to server to cross validate
 			RNQuickFirebase.signOut();
 			console.warn('User Logout from the Firebase');
 		} catch (e) {
 			console.warn(e);
+			params = { ['otp_send_event']: 'otp_failed' };
+			RNQuickFirebase.logEvent('otp_send_validate', null);
 		}
 	};
 

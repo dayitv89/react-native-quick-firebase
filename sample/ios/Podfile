@@ -21,4 +21,5 @@ target 'QuickFirebaseDemo' do
   pod 'Yoga', :path => PROJECT_PATH + 'react-native/ReactCommon/yoga'
   pod 'RNQuickFirebase', :path => PROJECT_PATH + 'react-native-quick-firebase/ios'
   pod 'Firebase/Auth'
+  pod 'FirebaseAnalytics'
 end
