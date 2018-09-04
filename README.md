@@ -1,6 +1,7 @@
 # react-native-quick-firebase
 
-![](https://img.shields.io/badge/Stable-v0.0.6-green.svg?style=flat)
+![](https://img.shields.io/badge/Stable-v0.1.0-green.svg?style=flat)
+![](https://img.shields.io/badge/RN-v0.55.4+-orange.svg?style=flat)
 
 Firebase simple integration with phone auth and analytics only.
 
