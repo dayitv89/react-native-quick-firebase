@@ -77,18 +77,22 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void validateOTP(String code,final Promise promise) {
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(reactContext.getCurrentActivity(), new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = task.getResult().getUser();
-                    promise.resolve(user.getIdToken(false).getResult().getToken());
-                } else {
-                    promise.reject(task.getException());
+        if (!TextUtils.isEmpty(mVerificationId)) {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+            mAuth.signInWithCredential(credential).addOnCompleteListener(reactContext.getCurrentActivity(), new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = task.getResult().getUser();
+                        promise.resolve(user.getToken(false).getResult().getToken());
+                    } else {
+                        promise.reject(task.getException());
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            promise.reject("Please enter valid OTP");
+        }
     }
 
     @ReactMethod
