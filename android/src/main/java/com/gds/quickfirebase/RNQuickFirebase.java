@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.text.TextUtils;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -84,7 +85,7 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         FirebaseUser user = task.getResult().getUser();
-                        promise.resolve(user.getToken(false).getResult().getToken());
+                        promise.resolve(user.getIdToken(false).getResult().getToken());
                     } else {
                         promise.reject(task.getException());
                     }
