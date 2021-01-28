@@ -1,33 +1,33 @@
 {
-	"name": "react-native-quick-firebase",
-	"version": "1.0.0",
-	"author": "Gaurav D. Sharma <er.gauravds@gmail.com>",
-	"description": "Quick firebase integration with phone auth and analytics",
-	"homepage": "https://github.com/dayitv89/react-native-quick-firebase",
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dayitv89/react-native-quick-firebase"
-	},
-	"license": "MIT",
-	"keywords": [
-		"react",
-		"auth",
-		"phone-auth",
-		"sms",
-		"react-native",
-		"react-native-firebase",
-		"firebase",
-		"analytics",
-		"sms-gateway"
-	],
-	"files": [
-		"index.js",
-		"ios/",
-		"android/"
-	],
-	"peerDependencies": {
-		"react": "*",
-		"react-native": "*"
-	}
+  "name": "react-native-quick-firebase",
+  "version": "1.1.0",
+  "author": "Gaurav D. Sharma <er.gauravds@gmail.com>",
+  "description": "Quick firebase integration with phone auth and analytics",
+  "homepage": "https://github.com/dayitv89/react-native-quick-firebase",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dayitv89/react-native-quick-firebase"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "auth",
+    "phone-auth",
+    "sms",
+    "react-native",
+    "react-native-firebase",
+    "firebase",
+    "analytics",
+    "sms-gateway"
+  ],
+  "files": [
+    "index.js",
+    "ios/",
+    "android/"
+  ],
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
 }
