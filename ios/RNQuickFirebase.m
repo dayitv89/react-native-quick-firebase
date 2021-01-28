@@ -38,7 +38,7 @@ RCT_EXPORT_METHOD(validateOTP:(NSString*)otp
                   rejecter:(RCTPromiseRejectBlock)reject) {
     FIRAuthCredential *credential = [[FIRPhoneAuthProvider provider] credentialWithVerificationID:self.verificationID
                                                                                  verificationCode:otp];
-    [[FIRAuth auth] signInAndRetrieveDataWithCredential:credential
+    [[FIRAuth auth] signInWithCredential:credential
                                              completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
                                                  if (error) {
                                                      reject(error.localizedDescription, error.localizedDescription, error);
