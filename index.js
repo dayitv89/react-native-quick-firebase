@@ -39,10 +39,6 @@ const setUserProperty = (name, property) => {
 	return bridge.setUserProperty(name, property)
 };
 
-const setScreenName = (screenName) => {
-	return bridge.setScreenName(screenName)
-};
-
 const logEvent = (name, params) =>{
 	return bridge.logEvent(name, params)
 };
@@ -54,6 +50,5 @@ module.exports = {
 	setAnalyticsEnabled,
 	setUserId,
 	setUserProperty,
-	setScreenName,
 	logEvent
 };

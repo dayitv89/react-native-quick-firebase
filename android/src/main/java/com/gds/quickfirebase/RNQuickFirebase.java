@@ -123,19 +123,6 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void setScreenName(final String name) {
-        final Activity currentActivity =  reactContext.getCurrentActivity();
-        if(currentActivity != null){
-            currentActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    firebaseAnalytics.setCurrentScreen(currentActivity, name, null);
-                }
-            });
-        }
-    }
-
-    @ReactMethod
     public void setAnalyticsEnabled(boolean enabled) {
         firebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
     }

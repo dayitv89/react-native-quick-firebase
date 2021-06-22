@@ -68,7 +68,6 @@ import RNQuickFirebase from 'react-native-quick-firebase';
 class App extends Component {
 	componentDidMount() {
 		RNQuickFirebase.setAnalyticsEnabled(true);
-		RNQuickFirebase.setScreenName('Base OTP Scene');
 	}
 
 	onSendOTP = async () => {
