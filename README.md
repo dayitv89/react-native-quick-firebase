@@ -1,6 +1,6 @@
 # react-native-quick-firebase
 
-![](https://img.shields.io/badge/Stable-v1.1.0-green.svg?style=flat)
+![](https://img.shields.io/badge/Stable-v1.1.1-green.svg?style=flat)
 ![](https://img.shields.io/badge/RN-v0.59.x+-orange.svg?style=flat)
 
 Firebase simple integration with phone auth and analytics only.
@@ -9,7 +9,7 @@ Implementation in React Native project
 
 Please add this entries as follow -
 
-- _iOS_ ( In Podfile)
+-   _iOS_ ( In Podfile)
 
 ```
 pod 'RNQuickFirebase', :path => PROJECT_PATH + 'react-native-quick-firebase/ios'
@@ -17,7 +17,7 @@ pod 'Firebase/Auth'
 pod 'FirebaseAnalytics'
 ```
 
-- _Android_
+-   _Android_
 
 android/settings.gradle
 
