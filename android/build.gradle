@@ -47,7 +47,7 @@ repositories {
 
 dependencies {
     //noinspection GradleCompatible
-    def firebaseBOMVersion = rootProject.hasProperty('firebaseBOMVersion')  ? rootProject.firebaseVersion : DEFAULT_FIREBASE_BOM_VERSION
+    def firebaseBOMVersion = rootProject.hasProperty('firebaseBOMVersion')  ? rootProject.firebaseBOMVersion : DEFAULT_FIREBASE_BOM_VERSION
     def supportLibVersion =  rootProject.hasProperty('supportLibVersion')  ? rootProject.supportLibVersion : DEFAULT_SUPPORT_LIB_VERSION
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.facebook.react:react-native:+"
