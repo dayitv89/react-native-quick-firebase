@@ -1,8 +1,7 @@
 package com.gds.quickfirebase;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.os.Bundle;
 import android.text.TextUtils;
 import com.facebook.react.bridge.Arguments;
@@ -20,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
@@ -52,28 +52,27 @@ public class RNQuickFirebase extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void sendOTP(String phone, final Promise promise) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phone,        // Phone number to verify
-                60,              // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                reactContext.getCurrentActivity(),       // Activity (for callback binding)
-                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        PhoneAuthOptions phoneAuthOptions =  new PhoneAuthOptions.Builder(mAuth).setPhoneNumber(phone)
+                .setTimeout(60L, TimeUnit.SECONDS).setActivity(reactContext.getCurrentActivity())
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     @Override
-                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        
                     }
 
                     @Override
-                    public void onVerificationFailed(FirebaseException e) {
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
                         promise.reject(e);
                     }
 
                     @Override
-                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken token) {
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         promise.resolve(verificationId);
                         mVerificationId = verificationId;
-                        mResendToken = token;
+                        mResendToken = forceResendingToken;
                     }
-                });
+                }).build();
+        PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
     }
 
     @ReactMethod
