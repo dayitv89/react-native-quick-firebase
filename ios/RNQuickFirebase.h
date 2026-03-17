@@ -3,14 +3,8 @@
 // All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#if __has_include(<FirebaseAuth/FIRAuth.h>)
-    #import <FirebaseAuth/FirebaseAuth.h>
-    #import <React/RCTBridgeModule.h>
+#import <React/RCTBridgeModule.h>
+#import <ReactCommon/RCTTurboModule.h>
 
-    @interface RNQuickFirebase : NSObject <RCTBridgeModule> @end
-#else
-    @interface RNQuickFirebase : NSObject @end
-#endif
-
-
+@interface RNQuickFirebase : NSObject <RCTBridgeModule, RCTTurboModule>
+@end

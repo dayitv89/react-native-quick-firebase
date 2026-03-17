@@ -1,47 +1,16 @@
-//
-// Copyright © 2017-Present, Gaurav D. Sharma
-// All rights reserved.
-//
 'use strict';
 
-import { NativeModules } from 'react-native';
-const bridge = NativeModules.RNQuickFirebase;
+import { TurboModuleRegistry } from 'react-native';
 
-const sendOTP = (phone: string): Promise => {
-	return new Promise((resolve, reject) =>
-		bridge
-			.sendOTP(phone)
-			.then(resolve)
-			.catch(reject)
-	);
-};
+const bridge = TurboModuleRegistry.getEnforcing('RNQuickFirebase');
 
-const validateOTP = (otp: string): Promise => {
-	return new Promise((resolve, reject) =>
-		bridge
-			.validateOTP(otp)
-			.then(resolve)
-			.catch(reject)
-	);
-};
-
+const sendOTP = (phone) => bridge.sendOTP(phone);
+const validateOTP = (otp) => bridge.validateOTP(otp);
 const signOut = () => bridge.signOut();
-
-// Firebase Analytics Methods
-const setAnalyticsEnabled = (enabled: boolean) => {
-	return bridge.setAnalyticsEnabled(enabled)
-};
-const setUserId = (id) => {
-	return bridge.setUserId(id)
-};
-
-const setUserProperty = (name, property) => {
-	return bridge.setUserProperty(name, property)
-};
-
-const logEvent = (name, params) =>{
-	return bridge.logEvent(name, params)
-};
+const setAnalyticsEnabled = (enabled) => bridge.setAnalyticsEnabled(enabled);
+const setUserId = (id) => bridge.setUserId(id);
+const setUserProperty = (name, property) => bridge.setUserProperty(name, property);
+const logEvent = (name, params) => bridge.logEvent(name, params);
 
 module.exports = {
 	sendOTP,
@@ -50,5 +19,5 @@ module.exports = {
 	setAnalyticsEnabled,
 	setUserId,
 	setUserProperty,
-	logEvent
+	logEvent,
 };

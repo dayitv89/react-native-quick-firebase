@@ -1,25 +1,43 @@
 package com.gds.quickfirebase;
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
+import androidx.annotation.NonNull;
+
+import com.facebook.react.TurboReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import com.facebook.react.module.model.ReactModuleInfo;
+import com.facebook.react.module.model.ReactModuleInfoProvider;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public class QuickFirebasePackage implements ReactPackage {
+public class QuickFirebasePackage extends TurboReactPackage {
+
     @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
-        modules.add(new RNQuickFirebase(reactContext));
-        return modules;
+    public NativeModule getModule(@NonNull String name, @NonNull ReactApplicationContext reactContext) {
+        if (name.equals(RNQuickFirebase.NAME)) {
+            return new RNQuickFirebase(reactContext);
+        }
+        return null;
     }
 
     @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+    public ReactModuleInfoProvider getReactModuleInfoProvider() {
+        return () -> {
+            final Map<String, ReactModuleInfo> moduleInfos = new HashMap<>();
+            moduleInfos.put(
+                RNQuickFirebase.NAME,
+                new ReactModuleInfo(
+                    RNQuickFirebase.NAME,
+                    RNQuickFirebase.class.getName(),
+                    false,  // canOverrideExistingModule
+                    false,  // needsEagerInit
+                    false,  // hasConstants
+                    false,  // isCxxModule
+                    true    // isTurboModule
+                )
+            );
+            return moduleInfos;
+        };
     }
 }

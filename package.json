@@ -1,6 +1,6 @@
 {
   "name": "react-native-quick-firebase",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "author": "Gaurav D. Sharma <er.gauravds@gmail.com>",
   "description": "Quick firebase integration with phone auth and analytics",
   "homepage": "https://github.com/dayitv89/react-native-quick-firebase",
@@ -23,11 +23,25 @@
   ],
   "files": [
     "index.js",
+    "src/",
     "ios/",
-    "android/"
+    "android/",
+    "RNQuickFirebase.podspec",
+    "tsconfig.json"
   ],
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": ">=0.71.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "codegenConfig": {
+    "name": "RNQuickFirebaseSpec",
+    "type": "modules",
+    "jsSrcsDir": "./src",
+    "android": {
+      "javaPackageName": "com.gds.quickfirebase"
+    }
   }
 }
